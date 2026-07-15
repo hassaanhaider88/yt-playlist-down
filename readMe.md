@@ -29,18 +29,6 @@ A REST API built with **Node.js**, **Express.js**, and **youtube-dl-exec (yt-dlp
 
 ---
 
-## Base URL
-
-### Development
-
-```
-http://localhost:4000
-```
-
-
-
----
-
 # Endpoints
 
 ## Health Check
