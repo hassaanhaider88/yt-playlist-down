@@ -6,6 +6,86 @@ const router = express.Router();
 const youtubedl = process.env.YTDLP_PATH
     ? create(process.env.YTDLP_PATH)
     : require("youtube-dl-exec");
+
+/**
+* @swagger
+* /yt-playlist/get-playlist-data:
+*   post:
+*     summary: Fetch YouTube Playlist Metadata
+*     description: Returns metadata for a YouTube playlist and its videos.
+*     tags:
+*       - Playlist
+*
+*     requestBody:
+*       required: true
+*       content:
+*         application/json:
+*           schema:
+*             type: object
+*             required:
+*               - playlistUrl
+*             properties:
+*               playlistUrl:
+*                 type: string
+*                 example: https://www.youtube.com/playlist?list=PLxxxxxxxx
+*
+*     responses:
+*       200:
+*         description: Playlist fetched successfully.
+*         content:
+*           application/json:
+*             schema:
+*               type: object
+*               properties:
+*                 success:
+*                   type: boolean
+*                   example: true
+*                 message:
+*                   type: string
+*                   example: Playlist data Fetch Successfully..
+*                 data:
+*                   type: object
+*                   properties:
+*                     id:
+*                       type: string
+*                     title:
+*                       type: string
+*                     description:
+*                       type: string
+*                     playlistCount:
+*                       type: integer
+*                     viewCount:
+*                       type: integer
+*                     channelName:
+*                       type: string
+*                     channelUrl:
+*                       type: string
+*                     entries:
+*                       type: array
+*                       items:
+*                         type: object
+*                         properties:
+*                           thumbnail:
+*                             type: string
+*                           duration:
+*                             type: integer
+*                           viewCount:
+*                             type: integer
+*                           likeCount:
+*                             type: integer
+*                           webpage_url:
+*                             type: string
+*                       
+*       400:
+*         description: Invalid Playlist URL
+*
+*       429:
+*         description: Too Many Requests
+*
+*       500:
+*         description: Internal Server Error
+*/
+
 router.post("/get-playlist-data", async (req, res) => {
     try {
         const { playlistUrl } = req.body;
