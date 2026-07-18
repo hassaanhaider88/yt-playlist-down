@@ -121,6 +121,56 @@ Returns server status.
 }
 ```
 
+### POST
+
+```
+/tiktok/download-video
+```
+
+### Request Body
+
+```json
+{
+  "tiktokUrl": "https://www.tiktok.com/@username/video/VIDOE_ID"
+}
+```
+
+### Response
+
+```js
+{
+  "success": true,
+  "message": "your result is ready",
+  "data": [
+    "Array of Vidoes alteast three"
+  ]
+}
+```
+
+### POST
+
+```
+/tiktok/download-images
+```
+
+### Request Body
+
+```json
+{
+  "tiktokUrl": "https://www.tiktok.com/@username/photo/POST_DI"
+}
+```
+
+### Response
+
+this will return downlaodable mp4 file and frontend should to tackle this like below
+
+```js
+currentObjectUrl = URL.createObjectURL(res.json());
+videoPlayer.src = currentObjectUrl;
+downloadBtn.href = currentObjectUrl;
+```
+
 ---
 
 # Request Example
@@ -131,13 +181,12 @@ const response = await fetch(
   {
     method: "POST",
     headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      playlistUrl:
-        "https://www.youtube.com/playlist?list=YOUR_PLAYLIST_ID"
-    })
-  }
+      playlistUrl: "https://www.youtube.com/playlist?list=YOUR_PLAYLIST_ID",
+    }),
+  },
 );
 
 const data = await response.json();
@@ -148,60 +197,58 @@ console.log(data);
 
 # Response Object
 
-| Field | Type | Description |
-|--------|------|-------------|
-| id | string | Playlist ID |
-| title | string | Playlist title |
-| description | string | Playlist description |
-| availability | string | Playlist visibility |
-| mainThumbnail | object | Playlist thumbnail |
-| lastModified | string | Last modified date |
-| playlistCount | number | Total videos |
-| viewCount | number | Playlist views |
-| channelName | string | Channel name |
-| channelUrl | string | Channel URL |
-| entries | array | List of playlist videos |
+| Field         | Type   | Description             |
+| ------------- | ------ | ----------------------- |
+| id            | string | Playlist ID             |
+| title         | string | Playlist title          |
+| description   | string | Playlist description    |
+| availability  | string | Playlist visibility     |
+| mainThumbnail | object | Playlist thumbnail      |
+| lastModified  | string | Last modified date      |
+| playlistCount | number | Total videos            |
+| viewCount     | number | Playlist views          |
+| channelName   | string | Channel name            |
+| channelUrl    | string | Channel URL             |
+| entries       | array  | List of playlist videos |
 
 ---
 
 # Video Object
 
-| Field | Type |
-|--------|------|
-| thumbnail | string |
-| description | string |
-| duration | number |
-| viewCount | number |
-| likeCount | number |
-| availability | string |
-| webpage_url | string |
+| Field              | Type   |
+| ------------------ | ------ |
+| thumbnail          | string |
+| description        | string |
+| duration           | number |
+| viewCount          | number |
+| likeCount          | number |
+| availability       | string |
+| webpage_url        | string |
 | requestedDownloads | object |
 
 ---
 
 # Download Object
 
-| Field | Type | Description |
-|--------|------|-------------|
-| url | string | Direct downloadable URL |
-| ext | string | File extension |
-| audio_ext | string | Audio format |
-| video_ext | string | Video format |
+| Field     | Type   | Description             |
+| --------- | ------ | ----------------------- |
+| url       | string | Direct downloadable URL |
+| ext       | string | File extension          |
+| audio_ext | string | Audio format            |
+| video_ext | string | Video format            |
 
 ---
 
 # HTTP Status
 
-| Status | Meaning |
-|---------|---------|
-| 200 | Success |
-| 400 | Invalid Request |
-| 429 | Too Many Requests |
-| 500 | Internal Server Error |
+| Status | Meaning               |
+| ------ | --------------------- |
+| 200    | Success               |
+| 400    | Invalid Request       |
+| 429    | Too Many Requests     |
+| 500    | Internal Server Error |
 
 ---
-
-
 
 # License
 

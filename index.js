@@ -6,10 +6,13 @@ const swaggerUi = require("swagger-ui-express");
 
 
 const swaggerSpec = require("./utils/swagger");
-const playlistRouter = require('./routes/playlistRoute');
 const limiter = require("./middlewares/rate-limit");
+const playlistRouter = require('./routes/playlistRoute');
+const tiktokDownloaderRouter = require("./routes/tiktokDownRoute")
+const instaDownloadRouter = require("./routes/instagramDownRoute")
 
 const app = express();
+
 
 // Middlewares
 app.use(cors());
@@ -50,9 +53,6 @@ app.get("/", (req, res) => {
 })
 
 
-
-app.use("/yt-playlist", playlistRouter)
-
 app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec, {
     explorer: true,
     customSiteTitle: "YouTube Playlist Downloader API",
@@ -78,6 +78,10 @@ app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec, {
       }
     `,
 }))
+
+app.use("/yt-playlist", playlistRouter)
+app.use("/tiktok",tiktokDownloaderRouter)
+app.use("/insta",instaDownloadRouter)
 
 app.listen(PORT, () => {
     console.log(`Server is running ${PORT}`)
