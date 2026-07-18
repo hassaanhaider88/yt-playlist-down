@@ -1,7 +1,9 @@
 const ffmpeg = require("fluent-ffmpeg");
 const ffmpegPath = require("ffmpeg-static");
 
-ffmpeg.setFfmpegPath("C:/Users/sanna/AppData/Local/Microsoft/WinGet/Packages/yt-dlp.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe/ffmpeg-N-124716-g054dffd133-win64-gpl/bin/ffmpeg.exe");
+ffmpeg.setFfmpegPath(
+    process.env.FFMPEG_PATH || ffmpegPath
+);
 
 const DEFAULT_OPTIONS = {
     width: 1080,
@@ -9,7 +11,7 @@ const DEFAULT_OPTIONS = {
     fps: 30,
     imageDuration: 2.5,
     transitionDuration: 0.8,
-    transitionType: "slideright",
+    transitionType: "slideleft",
 };
 
 function buildImageFilter(inputIndex, width, height, fps, label) {
