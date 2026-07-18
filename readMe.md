@@ -163,16 +163,12 @@ Returns server status.
 
 ### Response
 
+this will return downlaodable mp4 file and frontend should to tackle this like below
+
 ```js
-{
-  "success": true,
-  "message": "your result is ready",
-  "data": [
-    id : "",
-    images : ["array of all images in that post"],
-    audio : "audio url"
-  ]
-}
+currentObjectUrl = URL.createObjectURL(res.json());
+videoPlayer.src = currentObjectUrl;
+downloadBtn.href = currentObjectUrl;
 ```
 
 ---
